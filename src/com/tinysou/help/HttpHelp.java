@@ -216,14 +216,10 @@ public class HttpHelp {
 
 	// 发送get请求
 	public String get(String url) throws Exception {
-		System.out.println("GET");
 		this.requestType = HTTP_GET;
 		this.setUrl(url);
-		System.out.println("GET2");
 		this.httpRequest = new HttpGet(url);
-		System.out.println("GET3");
 		this.httpClientExecute();// 执行客户端请求
-		System.out.println("GET4");
 		return this.checkStatus();
 	}
 
@@ -277,27 +273,21 @@ public class HttpHelp {
 
 	// 执行http请求
 	public void httpClientExecute() throws Exception {
-		System.out.println("httpClientExecute1");
 		this.httpParameters = new BasicHttpParams();// 配置http请求参数
-		System.out.println("httpClientExecute2");
 		this.httpParameters.setParameter("charset", this.charset);// 指定http请求参数的字符编码
 		// 设置连接请求超时时间
 		HttpConnectionParams.setConnectionTimeout(this.httpParameters,
 				this.connectionTimeout);
-		System.out.println("httpClientExecute3");
 		// 设置socket请求超时时间
 		HttpConnectionParams.setSoTimeout(this.httpParameters, this.soTimeout);
-		System.out.println("httpClientExecute4");
 		// 创建一个默认的http请求客户端
 		try {
 			this.httpClient = new DefaultHttpClient(this.httpParameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("httpClientExecute5");
 		// 执行 HTTP POST请求执行前的事件监听回调工作（如：自定义提交的数据字段或上传的文件等）
 		this.getOnHttpRequestListener().onRequest(this);
-		System.out.println("httpClientExecute6");
 		// 发送http请求并获取服务端响应状态
 		try {
 			this.httpResponse = this.httpClient.execute(this.httpRequest);

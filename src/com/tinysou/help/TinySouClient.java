@@ -25,7 +25,6 @@ public class TinySouClient {
 
 	// 建立Request--设置header，params
 	public HttpHelp buildRequest() {
-		System.out.println("AAAAAAA");
 		HttpHelp httpRequest = new HttpHelp();
 		httpRequest.setCharset(HTTP.UTF_8).setConnectedTimeout(5000)
 				.setSoTimeout(10000);
@@ -33,14 +32,11 @@ public class TinySouClient {
 				.setOnHttpRequestListener(new HttpHelp.OnHttpRequestListener() {
 					@Override
 					public void onRequest(HttpHelp request) throws Exception {
-						System.out.println("BBBBBBB");
 						for (String key : header.keySet()) {
 							request.addHeader(key, header.get(key));
-							System.out.println("key "+key+" value "+ header.get(key));
 						}
 						StringEntity entity = new StringEntity(paramsBody,
 								HTTP.UTF_8);
-						System.out.println("paramsBody "+paramsBody);
 						request.buildRequestEntity(method, entity);
 					}
 
@@ -60,14 +56,10 @@ public class TinySouClient {
 	}
 
 	public String execute() throws Exception {
-		System.out.println("aaaaaaa");
 		HttpHelp request = this.buildRequest();
-		System.out.println("bbbbbbb");
 		String result;
 		if ("GET".equals(method)) {
-			System.out.println("ccccccc");
 			result = request.get(url);
-			System.out.println("dddddd");
 		} else if ("POST".equals(method)) {
 			result = request.post(url);
 		} else if ("PUT".equals(method)) {
@@ -77,9 +69,7 @@ public class TinySouClient {
 		} else {
 			result = "方法异常";
 		}
-		System.out.println("eeeeeeee");
 		statusCode = request.getStatusCode();
-		System.out.println("fffffff");
 		return result;
 	}
 
