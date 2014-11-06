@@ -1,6 +1,8 @@
 package com.tinysou.help;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -16,6 +18,8 @@ public class Collection {
 	protected String method = new String();
 	protected String paramsBody = new String();
 	protected int statusOk;
+	protected String response = new String();
+	protected List<Object> result = new ArrayList<Object>();
 
 	public Collection(String AUTH_TOKEN, String engineName) {
 		this.AUTH_TOKEN = AUTH_TOKEN;
@@ -26,17 +30,22 @@ public class Collection {
 	}
 
 	// 罗列 Collections
-	public void list() {
+	public List<Object> list() throws Exception {
 		url = "http://api.tinysou.com/v1/engines/" + engineName
 				+ "/collections";
 		method = "GET";
 		statusOk = 200;
 		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		response = client.execute();
+		int statusCode = client.getStatusCode();
+		result.add(response);
+		result.add(statusCode);
+		return result;
 	}
 
 	// 创建一个 Collection
-	public void create(String collectionName, Map<String, String> field_types)
-			throws JSONException {
+	public List<Object> create(String collectionName, Map<String, String> field_types)
+			throws Exception {
 		url = "http://api.tinysou.com/v1/engines" + engineName + "/collections";
 		method = "POST";
 		statusOk = 201;
@@ -46,24 +55,39 @@ public class Collection {
 		params.accumulate("field_types", field_types);
 		paramsBody = params.toString();
 		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		response = client.execute();
+		int statusCode = client.getStatusCode();
+		result.add(response);
+		result.add(statusCode);
+		return result;
 	}
 
 	// 获取一个 Collection
-	public void get(String collectionName) {
+	public List<Object> get(String collectionName) throws Exception {
 		url = "http://api.tinysou.com/v1/engines/" + collectionName
 				+ "/collections" + collectionName;
 		method = "GET";
 		statusOk = 200;
 		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		response = client.execute();
+		int statusCode = client.getStatusCode();
+		result.add(response);
+		result.add(statusCode);
+		return result;
 	}
 
 	// 删除一个 Collection
-	public void delete(String collectionName) {
+	public List<Object> delete(String collectionName) throws Exception {
 		url = "http://api.tinysou.com/v1/engines/" + collectionName
 				+ "/collections" + collectionName;
 		method = "DELETE";
 		statusOk = 204;
 		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		response = client.execute();
+		int statusCode = client.getStatusCode();
+		result.add(response);
+		result.add(statusCode);
+		return result;
 	}
 
 }

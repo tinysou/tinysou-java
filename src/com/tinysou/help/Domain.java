@@ -1,5 +1,6 @@
 package com.tinysou.help;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,8 @@ public class Domain {
 	protected String method = new String();
 	protected String paramsBody = new String();
 	protected int statusOk;
+	protected String response = new String();
+	protected List<Object> result = new ArrayList<Object>();
 
 	public Domain(String AUTH_TOKEN, String engineName) {
 		this.AUTH_TOKEN = AUTH_TOKEN;
