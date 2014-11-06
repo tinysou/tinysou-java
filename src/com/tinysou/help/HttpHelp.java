@@ -196,8 +196,9 @@ public class HttpHelp {
     }
 
     //设置header--map
-    public HttpHelp setHeader(Header Header){
+    public HttpHelp setHeader(Header header){
         this.httpRequest.setHeader(header);
+        return this;
     }
 
     //获取header
