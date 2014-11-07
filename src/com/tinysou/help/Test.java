@@ -38,28 +38,18 @@ public class Test {
 		Engine engine = new Engine(AUTH_TOKEN);
 		// 罗列 Engines
 		result = engine.list();
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 创建一个标识为"engineName",显示名为"hetun"的Engine
 		result = engine.create("engineName", "hetun");
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 获取标识为"engineName"的Engine
 		result = engine.get("engineName");
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 更新标识为"engineName"的Engine，将显示名称更新为"panghetun"
 		result = engine.update("engineName", "panghetun");
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 删除标识为"engineName"的Engine
-		result = engine.delete("wym2");
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
+		result = engine.delete("hetun");
 	}
 
 	/*
@@ -77,24 +67,15 @@ public class Test {
 		field_types.put("body", "text");
 		// 创建名为"collectionName"的Collection
 		result = collection.create("collectionName", field_types);
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 罗列 Collections
 		result = collection.list();
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 获取名为"collectionName"的Collection
 		result = collection.get("collectionName");
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 删除名为"collectionName"的Collection
 		result = collection.delete("collectionName");
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
-		result = collection.create("collectionName", field_types);
 	}
 
 	/*
@@ -117,8 +98,6 @@ public class Test {
 						"我们很高兴地在这里宣布，今天开始，微搜索支持拼音搜索了。微搜索的拼音搜索包括：拼音补全，首字母搜索及补全，例如：如果你的文本中包含 程序员，输入 cxy, chen, chengxu均可匹配到程序员效果如下图所示：");
 		// 创建一个Document
 		result = document.create(field_types);
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		statusCode = new Integer(result.get(1).toString());
 		String documentId = new String();
 		// 判断响应是否正常
@@ -126,28 +105,19 @@ public class Test {
 			json = (JSONObject) result.get(0);
 			// 获取新建的document的id
 			documentId = json.getString("id");
-			System.out.println(json.getString("id"));
 		} else {
 			return;
 		}
 		result.clear();
 		result = document.list();
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 获取Document
 		result = document.get(documentId);
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 更新Document
 		result = document.update(documentId, field_types);
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 删除Document
 		result = document.delete(documentId);
-		System.out.println("repsonse " + result.get(0) + " statusCode "
-				+ result.get(1));
 	}
 }
