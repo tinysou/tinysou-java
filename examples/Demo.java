@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import com.tinysou.help.AutoComplete;
 import com.tinysou.help.Collection;
 import com.tinysou.help.Engine;
 import com.tinysou.help.Document;
@@ -32,7 +32,8 @@ public class Demo {
 		// EngineTest();
 		// CollectionTest();
 		// DocumentTest();
-		SearchTest();
+		// SearchTest();
+		// AutoCompleteTest();
 	}
 
 	/*
@@ -128,17 +129,27 @@ public class Demo {
 		// 删除Document
 		result = document.delete(documentId);
 	}
-	
-	public static void SearchTest() throws Exception{
+
+	public static void SearchTest() throws Exception {
 		Search search = new Search(AUTH_TOKEN, ENGINE_NEME, "page");
 		JSONObject paramsBody = new JSONObject();
 		paramsBody.put("q", "搜索");
 		search.setParams(paramsBody);
 		result = search.doSearchSingleCollection();
-		System.out.println("response " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		paramsBody.put("c", "page1,page2");
 		result = search.doSearchMultiCollection();
+	}
+
+	public static void AutoCompleteTest() throws Exception {
+		AutoComplete autoComplete = new AutoComplete(AUTH_TOKEN, ENGINE_NEME,
+				"page");
+		JSONObject paramsBody = new JSONObject();
+		paramsBody.put("q", "搜索");
+		autoComplete.setParams(paramsBody);
+		result = autoComplete.doAutoCompleteSingleCollection();
+		result.clear();
+		paramsBody.put("c", "page1,page2");
+		result = autoComplete.doAutoCompleteMultiCollection();
 	}
 }

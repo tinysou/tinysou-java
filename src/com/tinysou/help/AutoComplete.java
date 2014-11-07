@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-public class Search {
-
+public class AutoComplete {
+	
 	protected String authToken = new String();
 	protected String engineName = new String();
 	protected String collectionName = new String();
@@ -17,7 +17,7 @@ public class Search {
 	protected JSONObject json = new JSONObject();
 	protected List<Object> result = new ArrayList<Object>();
 
-	public Search(String authToken, String engineName, String collectionName) {
+	public AutoComplete(String authToken, String engineName, String collectionName) {
 		this.authToken = authToken;
 		this.engineName = engineName;
 		this.collectionName = collectionName;
@@ -27,12 +27,12 @@ public class Search {
 		this.paramsBody = paramsBody.toString();
 	}
 
-	public List<Object> doSearchSingleCollection() throws Exception {
+	public List<Object> doAutoCompleteSingleCollection() throws Exception {
 		String token = "token " + authToken;
 		header.put("Authorization", token);
 		header.put("Content-Type", "application/json");
 		String url = "http://api.tinysou.com/v1/engines/" + engineName
-				+ "/collections/" + collectionName + "/search";
+				+ "/collections/" + collectionName + "/autocomplete";
 		TinySouClient client = new TinySouClient(url, "POST", header,
 				paramsBody);
 		String response = client.execute();
@@ -43,11 +43,11 @@ public class Search {
 		return result;
 	}
 
-	public List<Object> doSearchMultiCollection() throws Exception {
+	public List<Object> doAutoCompleteMultiCollection() throws Exception {
 		String token = "token " + authToken;
 		header.put("Authorization", token);
 		header.put("Content-Type", "application/json");
-		String url = "http://api.tinysou.com/v1/engines/" + engineName + "/search";
+		String url = "http://api.tinysou.com/v1/engines/" + engineName + "/autocomplete";
 		TinySouClient client = new TinySouClient(url, "POST", header,
 				paramsBody);
 		String response = client.execute();
