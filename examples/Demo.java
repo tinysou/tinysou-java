@@ -52,7 +52,7 @@ public class Demo {
 		result = engine.update(ENGINE_NEME, "panghetun");
 		result.clear();
 		// 删除Engine
-		result = engine.delete("hetun");
+		result = engine.delete(ENGINE_NEME);
 	}
 
 	/*
