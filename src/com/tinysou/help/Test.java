@@ -18,6 +18,7 @@ public class Test {
 	 */
 
 	public final static String AUTH_TOKEN = "YOUR_TOKEN";
+	public final static String ENGINE_NEME = "YOUR_ENGINE_NAME";
 	public static List<Object> result = new ArrayList<Object>();
 	protected static JSONObject json = new JSONObject();
 	protected static JSONTokener jsonTokener = new JSONTokener(new String());
@@ -39,16 +40,16 @@ public class Test {
 		// 罗列 Engines
 		result = engine.list();
 		result.clear();
-		// 创建一个标识为"engineName",显示名为"hetun"的Engine
-		result = engine.create("engineName", "hetun");
+		// 创建Engine
+		result = engine.create(ENGINE_NEME, "hetun");
 		result.clear();
-		// 获取标识为"engineName"的Engine
-		result = engine.get("engineName");
+		// 获取Engine
+		result = engine.get(ENGINE_NEME);
 		result.clear();
-		// 更新标识为"engineName"的Engine，将显示名称更新为"panghetun"
-		result = engine.update("engineName", "panghetun");
+		// 更新Engine
+		result = engine.update(ENGINE_NEME, "panghetun");
 		result.clear();
-		// 删除标识为"engineName"的Engine
+		// 删除Engine
 		result = engine.delete("hetun");
 	}
 
@@ -58,7 +59,7 @@ public class Test {
 	 */
 	public static void CollectionTest() throws Exception {
 		// 新建Collection
-		Collection collection = new Collection(AUTH_TOKEN, "engineName");
+		Collection collection = new Collection(AUTH_TOKEN, ENGINE_NEME);
 		Map<String, String> field_types = new HashMap<String, String>();
 		field_types.put("title", "string");
 		field_types.put("tags", "string");
