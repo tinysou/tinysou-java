@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import com.tinysou.help.Collection;
 import com.tinysou.help.Engine;
 import com.tinysou.help.Document;
+import com.tinysou.help.Search;
 
 public class Demo {
 
@@ -19,17 +21,18 @@ public class Demo {
 	 * @throws Exception
 	 */
 
-	public final static String AUTH_TOKEN = "YOUR_AUTH_TOKEN";
-	public final static String ENGINE_NEME = "YOUR_ENGINE_NAME";
+	public final static String AUTH_TOKEN = "fc0e0c3eedab24673c4e";
+	public final static String ENGINE_NEME = "wym";
 	public static List<Object> result = new ArrayList<Object>();
 	protected static JSONObject json = new JSONObject();
 	protected static JSONTokener jsonTokener = new JSONTokener(new String());
 	public static int statusCode;
 
 	public static void main(String[] args) throws Exception {
-		 EngineTest();
+		// EngineTest();
 		// CollectionTest();
-		// Document();
+		// DocumentTest();
+		SearchTest();
 	}
 
 	/*
@@ -47,6 +50,8 @@ public class Demo {
 		result.clear();
 		// 获取Engine
 		result = engine.get(ENGINE_NEME);
+		System.out.println("response " + result.get(0) + " statusCode "
+				+ result.get(1));
 		result.clear();
 		// 更新Engine
 		result = engine.update(ENGINE_NEME, "panghetun");
@@ -85,7 +90,7 @@ public class Demo {
 	 * Document Api ，演示如下操作： 罗列 Documents 创建一个 Document 获取一个 Document 更新一个
 	 * Document 删除一个 Document
 	 */
-	public static void Document() throws Exception {
+	public static void DocumentTest() throws Exception {
 		// 新建Document
 		Document document = new Document(AUTH_TOKEN, "engineName",
 				"collectionName");
@@ -122,5 +127,18 @@ public class Demo {
 		result.clear();
 		// 删除Document
 		result = document.delete(documentId);
+	}
+	
+	public static void SearchTest() throws Exception{
+		Search search = new Search(AUTH_TOKEN, ENGINE_NEME, "page");
+		JSONObject paramsBody = new JSONObject();
+		paramsBody.put("q", "搜索");
+		search.setParams(paramsBody);
+		result = search.doSearchSingleCollection();
+		System.out.println("response " + result.get(0) + " statusCode "
+				+ result.get(1));
+		result.clear();
+		paramsBody.put("c", "page1,page2");
+		result = search.doSearchMultiCollection();
 	}
 }
