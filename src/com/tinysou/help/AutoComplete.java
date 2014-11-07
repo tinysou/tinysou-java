@@ -47,8 +47,7 @@ public class AutoComplete {
 		String token = "token " + authToken;
 		header.put("Authorization", token);
 		header.put("Content-Type", "application/json");
-		String url = "http://api.tinysou.com/v1/engines/" + engineName
-				+ "/collections/" + collectionName + "/autocomplete";
+		String url = "http://api.tinysou.com/v1/engines/" + engineName + "/autocomplete";
 		TinySouClient client = new TinySouClient(url, "POST", header,
 				paramsBody);
 		String response = client.execute();
