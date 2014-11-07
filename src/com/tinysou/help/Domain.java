@@ -35,7 +35,8 @@ public class Domain {
 		url = "http://api.tinysou.com/v1/engines/" + engineName;
 		method = "GET";
 		statusOk = 200;
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 	}
 
 	// 创建一个 Domain
@@ -50,21 +51,25 @@ public class Domain {
 		params.accumulate("white_list", whiteList);
 		params.accumulate("black_list", blackList);
 		paramsBody = params.toString();
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 	}
 
 	// 获取一个 Domain
 	public void get(String domainId) {
-		url = "http://api.tinysou.com/v1/engines/" + engineName + "domains/" + domainId;
+		url = "http://api.tinysou.com/v1/engines/" + engineName + "domains/"
+				+ domainId;
 		method = "GET";
 		statusOk = 200;
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 	}
 
 	// 更新一个 Domain
-	public void update(String domainId, String url, List<String> whiteList, List<String> blackList)
-			throws JSONException {
-		url = "http://api.tinysou.com/v1/engines/" + engineName + "domains/" + domainId;
+	public void update(String domainId, String url, List<String> whiteList,
+			List<String> blackList) throws JSONException {
+		url = "http://api.tinysou.com/v1/engines/" + engineName + "domains/"
+				+ domainId;
 		method = "PUT";
 		statusOk = 200;
 		// 设置params
@@ -73,15 +78,18 @@ public class Domain {
 		params.accumulate("white_list", whiteList);
 		params.accumulate("black_list", blackList);
 		paramsBody = params.toString();
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 	}
 
 	// 删除一个 Domain
 	public void delete(String domainId) {
-		url = "http://api.tinysou.com/v1/engines/" + engineName + "domains/" + domainId;
+		url = "http://api.tinysou.com/v1/engines/" + engineName + "domains/"
+				+ domainId;
 		method = "DELETE";
 		statusOk = 204;
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 	}
 
 }

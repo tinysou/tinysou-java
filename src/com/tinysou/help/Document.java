@@ -37,7 +37,8 @@ public class Document {
 				+ "/collections" + collectionName + "/documents";
 		method = "GET";
 		statusOk = 200;
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 		response = client.execute();
 		int statusCode = client.getStatusCode();
 		result.add(response);
@@ -46,7 +47,8 @@ public class Document {
 	}
 
 	// 创建一个 Document
-	public List<Object> create(Map<String, String> field_types) throws Exception {
+	public List<Object> create(Map<String, String> field_types)
+			throws Exception {
 		url = "http://api.tinysou.com/v1/engines" + engineName + "/collections"
 				+ collectionName + "/documents";
 		method = "POST";
@@ -57,7 +59,8 @@ public class Document {
 			params.accumulate(key, field_types.get(key));
 		}
 		paramsBody = params.toString();
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 		response = client.execute();
 		int statusCode = client.getStatusCode();
 		result.add(response);
@@ -71,7 +74,8 @@ public class Document {
 				+ "/collections" + collectionName + "/document_id" + documentId;
 		method = "GET";
 		statusOk = 200;
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 		response = client.execute();
 		int statusCode = client.getStatusCode();
 		result.add(response);
@@ -80,8 +84,8 @@ public class Document {
 	}
 
 	// 更新一个 Document
-	public List<Object> update(String documentId, Map<String, String> field_types)
-			throws Exception {
+	public List<Object> update(String documentId,
+			Map<String, String> field_types) throws Exception {
 		url = "http://api.tinysou.com/v1/engines/" + engineName
 				+ "/collections" + collectionName + "/document_id" + documentId;
 		method = "PUT";
@@ -92,7 +96,8 @@ public class Document {
 			params.accumulate(key, field_types.get(key));
 		}
 		paramsBody = params.toString();
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 		response = client.execute();
 		int statusCode = client.getStatusCode();
 		result.add(response);
@@ -106,7 +111,8 @@ public class Document {
 				+ "/collections" + collectionName + "/document_id" + documentId;
 		method = "DELETE";
 		statusOk = 204;
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 		response = client.execute();
 		int statusCode = client.getStatusCode();
 		result.add(response);

@@ -35,7 +35,8 @@ public class Collection {
 				+ "/collections";
 		method = "GET";
 		statusOk = 200;
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 		response = client.execute();
 		int statusCode = client.getStatusCode();
 		result.add(response);
@@ -44,8 +45,8 @@ public class Collection {
 	}
 
 	// 创建一个 Collection
-	public List<Object> create(String collectionName, Map<String, String> field_types)
-			throws Exception {
+	public List<Object> create(String collectionName,
+			Map<String, String> field_types) throws Exception {
 		url = "http://api.tinysou.com/v1/engines" + engineName + "/collections";
 		method = "POST";
 		statusOk = 201;
@@ -54,7 +55,8 @@ public class Collection {
 		params.accumulate("name", collectionName);
 		params.accumulate("field_types", field_types);
 		paramsBody = params.toString();
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 		response = client.execute();
 		int statusCode = client.getStatusCode();
 		result.add(response);
@@ -68,7 +70,8 @@ public class Collection {
 				+ "/collections" + collectionName;
 		method = "GET";
 		statusOk = 200;
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 		response = client.execute();
 		int statusCode = client.getStatusCode();
 		result.add(response);
@@ -82,7 +85,8 @@ public class Collection {
 				+ "/collections" + collectionName;
 		method = "DELETE";
 		statusOk = 204;
-		TinySouClient client = new TinySouClient(url, method, header, paramsBody);
+		TinySouClient client = new TinySouClient(url, method, header,
+				paramsBody);
 		response = client.execute();
 		int statusCode = client.getStatusCode();
 		result.add(response);

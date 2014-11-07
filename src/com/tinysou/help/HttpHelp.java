@@ -319,8 +319,11 @@ public class HttpHelp {
 
 	// 读取服务端返回的输入流Json并转换成TinySoHelp格式返回
 	public String getInputStreamJson() throws Exception {
-		String inString = EntityUtils.toString(this.httpResponse.getEntity(),
+		String inString = new String();
+		if(this.httpResponse.getEntity() != null) {
+			inString = EntityUtils.toString(this.httpResponse.getEntity(),
 				HTTP.UTF_8);
+		}
 		return inString;
 	}
 
@@ -336,7 +339,8 @@ public class HttpHelp {
 	public String checkStatus() throws Exception {
 		OnHttpRequestListener listener = this.getOnHttpRequestListener();
 		String content;
-		if (this.statusCode == HttpStatus.SC_OK) {
+		//System.out.println(HttpStatus.SC_OK);
+		if (this.statusCode < 400) {
 			content = listener.onSucceed(this.statusCode, this);
 		} else {
 			content = listener.onFailed(this.statusCode, this);
