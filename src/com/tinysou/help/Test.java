@@ -24,9 +24,9 @@ public class Test {
 	public static int statusCode;
 
 	public static void main(String[] args) throws Exception {
-		// EngineTest();
+		 EngineTest();
 		// CollectionTest();
-		Document();
+		//Document();
 	}
 
 	public static void EngineTest() throws Exception {

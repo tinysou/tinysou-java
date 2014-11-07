@@ -53,8 +53,8 @@ public class Document {
 	// 创建一个 Document
 	public List<Object> create(Map<String, Object> field_types)
 			throws Exception {
-		url = "http://api.tinysou.com/v1/engines/" + engineName + "/collections/"
-				+ collectionName + "/documents";
+		url = "http://api.tinysou.com/v1/engines/" + engineName
+				+ "/collections/" + collectionName + "/documents";
 		method = "POST";
 		statusOk = 201;
 		// 设置params
