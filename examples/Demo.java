@@ -1,5 +1,3 @@
-package com.tinysou.help;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,14 +8,18 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-public class Test {
+import com.tinysou.help.Collection;
+import com.tinysou.help.Engine;
+import com.tinysou.help.Document;
+
+public class Demo {
 
 	/**
 	 * @param args
 	 * @throws Exception
 	 */
 
-	public final static String AUTH_TOKEN = "YOUR_TOKEN";
+	public final static String AUTH_TOKEN = "YOUR_AUTH_TOKEN";
 	public final static String ENGINE_NEME = "YOUR_ENGINE_NAME";
 	public static List<Object> result = new ArrayList<Object>();
 	protected static JSONObject json = new JSONObject();
@@ -25,7 +27,7 @@ public class Test {
 	public static int statusCode;
 
 	public static void main(String[] args) throws Exception {
-		// EngineTest();
+		 EngineTest();
 		// CollectionTest();
 		// Document();
 	}
