@@ -115,13 +115,12 @@ Delete:
 ## Autocomplete
 ```java
   AutoComplete autoComplete = new AutoComplete(AUTH_TOKEN, ENGINE_NEME, "page");
-		JSONObject paramsBody = new JSONObject();
-		paramsBody.put("q", "搜索");
-		autoComplete.setParams(paramsBody);
-		result = autoComplete.doAutoCompleteSingleCollection();  //单collection自动补全
-		result.clear();
-		paramsBody.put("c", "page1,page2");
-		result = autoComplete.doAutoCompleteMultiCollection();  //跨collection自动补全
+  JSONObject paramsBody = new JSONObject();
+  paramsBody.put("q", "搜索");
+  autoComplete.setParams(paramsBody);
+  autoComplete.doAutoCompleteSingleCollection();  //单collection自动补全
+  paramsBody.put("c", "page1,page2");
+  autoComplete.doAutoCompleteMultiCollection();  //跨collection自动补全
 ```
 
 ## Examples
