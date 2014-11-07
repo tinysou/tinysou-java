@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
+import org.json.JSONTokener;
 
 public class Collection {
 
@@ -19,6 +21,8 @@ public class Collection {
 	protected String paramsBody = new String();
 	protected int statusOk;
 	protected String response = new String();
+	protected JSONObject json = new JSONObject();
+	protected JSONTokener jsonTokener = new JSONTokener(new String());
 	protected List<Object> result = new ArrayList<Object>();
 
 	public Collection(String AUTH_TOKEN, String engineName) {
@@ -38,6 +42,7 @@ public class Collection {
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		jsonTokener = new JSONTokener(response);
 		int statusCode = client.getStatusCode();
 		result.add(response);
 		result.add(statusCode);
@@ -47,7 +52,8 @@ public class Collection {
 	// 创建一个 Collection
 	public List<Object> create(String collectionName,
 			Map<String, String> field_types) throws Exception {
-		url = "http://api.tinysou.com/v1/engines" + engineName + "/collections";
+		url = "http://api.tinysou.com/v1/engines/" + engineName
+				+ "/collections";
 		method = "POST";
 		statusOk = 201;
 		// 设置params
@@ -58,6 +64,7 @@ public class Collection {
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject(response);
 		int statusCode = client.getStatusCode();
 		result.add(response);
 		result.add(statusCode);
@@ -66,13 +73,14 @@ public class Collection {
 
 	// 获取一个 Collection
 	public List<Object> get(String collectionName) throws Exception {
-		url = "http://api.tinysou.com/v1/engines/" + collectionName
-				+ "/collections" + collectionName;
+		url = "http://api.tinysou.com/v1/engines/" + engineName
+				+ "/collections/" + collectionName;
 		method = "GET";
 		statusOk = 200;
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject(response);
 		int statusCode = client.getStatusCode();
 		result.add(response);
 		result.add(statusCode);
@@ -81,13 +89,14 @@ public class Collection {
 
 	// 删除一个 Collection
 	public List<Object> delete(String collectionName) throws Exception {
-		url = "http://api.tinysou.com/v1/engines/" + collectionName
-				+ "/collections" + collectionName;
+		url = "http://api.tinysou.com/v1/engines/" + engineName
+				+ "/collections/" + collectionName;
 		method = "DELETE";
 		statusOk = 204;
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject();
 		int statusCode = client.getStatusCode();
 		result.add(response);
 		result.add(statusCode);

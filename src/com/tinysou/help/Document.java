@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class Document {
 
@@ -20,6 +21,8 @@ public class Document {
 	protected String paramsBody = new String();
 	protected int statusOk;
 	protected String response = new String();
+	protected JSONObject json = new JSONObject();
+	protected JSONTokener jsonTokener = new JSONTokener(new String());
 	protected List<Object> result = new ArrayList<Object>();
 
 	public Document(String AUTH_TOKEN, String engineName, String collectionName) {
@@ -34,22 +37,23 @@ public class Document {
 	// 罗列 Documents
 	public List<Object> list() throws Exception {
 		url = "http://api.tinysou.com/v1/engines/" + engineName
-				+ "/collections" + collectionName + "/documents";
+				+ "/collections/" + collectionName + "/documents";
 		method = "GET";
 		statusOk = 200;
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		jsonTokener = new JSONTokener(response);
 		int statusCode = client.getStatusCode();
-		result.add(response);
+		result.add(json);
 		result.add(statusCode);
 		return result;
 	}
 
 	// 创建一个 Document
-	public List<Object> create(Map<String, String> field_types)
+	public List<Object> create(Map<String, Object> field_types)
 			throws Exception {
-		url = "http://api.tinysou.com/v1/engines" + engineName + "/collections"
+		url = "http://api.tinysou.com/v1/engines/" + engineName + "/collections/"
 				+ collectionName + "/documents";
 		method = "POST";
 		statusOk = 201;
@@ -62,8 +66,9 @@ public class Document {
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject(response);
 		int statusCode = client.getStatusCode();
-		result.add(response);
+		result.add(json);
 		result.add(statusCode);
 		return result;
 	}
@@ -71,23 +76,24 @@ public class Document {
 	// 获取一个 Document
 	public List<Object> get(String documentId) throws Exception {
 		url = "http://api.tinysou.com/v1/engines/" + engineName
-				+ "/collections" + collectionName + "/document_id" + documentId;
+				+ "/collections/" + collectionName + "/documents/" + documentId;
 		method = "GET";
 		statusOk = 200;
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject(response);
 		int statusCode = client.getStatusCode();
-		result.add(response);
+		result.add(json);
 		result.add(statusCode);
 		return result;
 	}
 
 	// 更新一个 Document
 	public List<Object> update(String documentId,
-			Map<String, String> field_types) throws Exception {
+			Map<String, Object> field_types) throws Exception {
 		url = "http://api.tinysou.com/v1/engines/" + engineName
-				+ "/collections" + collectionName + "/document_id" + documentId;
+				+ "/collections/" + collectionName + "/documents/" + documentId;
 		method = "PUT";
 		statusOk = 200;// 创建201
 		// 设置params
@@ -99,8 +105,9 @@ public class Document {
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject(response);
 		int statusCode = client.getStatusCode();
-		result.add(response);
+		result.add(json);
 		result.add(statusCode);
 		return result;
 	}
@@ -108,14 +115,15 @@ public class Document {
 	// 删除一个 Document
 	public List<Object> delete(String documentId) throws Exception {
 		url = "http://api.tinysou.com/v1/engines/" + engineName
-				+ "/collections" + collectionName + "/document_id" + documentId;
+				+ "/collections/" + collectionName + "/documents/" + documentId;
 		method = "DELETE";
 		statusOk = 204;
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject();
 		int statusCode = client.getStatusCode();
-		result.add(response);
+		result.add(json);
 		result.add(statusCode);
 		return result;
 	}

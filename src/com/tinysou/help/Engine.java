@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import com.tinysou.help.HttpHelp;
 
@@ -18,6 +19,8 @@ public class Engine {
 	protected String paramsBody = new String();
 	protected int statusOk;
 	protected String response = new String();
+	protected JSONObject json = new JSONObject();
+	protected JSONTokener jsonTokener = new JSONTokener(new String());
 	protected List<Object> result = new ArrayList<Object>();
 
 	public Engine(String AUTH_TOKEN) {
@@ -35,6 +38,7 @@ public class Engine {
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		jsonTokener = new JSONTokener(response);
 		int statusCode = client.getStatusCode();
 		result.add(response);
 		result.add(statusCode);
@@ -58,6 +62,7 @@ public class Engine {
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject(response);
 		int statusCode = client.getStatusCode();
 		result.add(response);
 		result.add(statusCode);
@@ -72,6 +77,7 @@ public class Engine {
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject(response);
 		int statusCode = client.getStatusCode();
 		result.add(response);
 		result.add(statusCode);
@@ -91,6 +97,7 @@ public class Engine {
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject(response);
 		int statusCode = client.getStatusCode();
 		result.add(response);
 		result.add(statusCode);
@@ -105,6 +112,7 @@ public class Engine {
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
+		json = new JSONObject();
 		int statusCode = client.getStatusCode();
 		result.add(response);
 		result.add(statusCode);

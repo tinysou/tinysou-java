@@ -1,6 +1,7 @@
 package com.tinysou.help;
 
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -17,8 +18,11 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.SocketTimeoutException;
 
 /**
@@ -319,10 +323,16 @@ public class HttpHelp {
 
 	// 读取服务端返回的输入流Json并转换成TinySoHelp格式返回
 	public String getInputStreamJson() throws Exception {
+		HttpEntity entity = this.httpResponse.getEntity();
+		// JSONObject json = new JSONObject();
 		String inString = new String();
-		if(this.httpResponse.getEntity() != null) {
-			inString = EntityUtils.toString(this.httpResponse.getEntity(),
-				HTTP.UTF_8);
+		if (entity != null) {
+			// InputStreamReader reader = new
+			// InputStreamReader(entity.getContent());
+			// String inString = EntityUtils.toString(entity,HTTP.UTF_8);
+			// System.out.println("sds "+ inString);
+			// json = new JSONObject(new JSONTokener(reader) );
+			inString = EntityUtils.toString(entity, HTTP.UTF_8);
 		}
 		return inString;
 	}
@@ -339,7 +349,7 @@ public class HttpHelp {
 	public String checkStatus() throws Exception {
 		OnHttpRequestListener listener = this.getOnHttpRequestListener();
 		String content;
-		//System.out.println(HttpStatus.SC_OK);
+		// System.out.println(HttpStatus.SC_OK);
 		if (this.statusCode < 400) {
 			content = listener.onSucceed(this.statusCode, this);
 		} else {

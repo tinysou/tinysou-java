@@ -2,8 +2,10 @@ package com.tinysou.help;
 
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
 
 import com.tinysou.help.HttpHelp;
 
@@ -49,7 +51,7 @@ public class TinySouClient {
 					@Override
 					public String onFailed(int statusCode, HttpHelp request)
 							throws Exception {
-						return "POST请求失败：statusCode " + statusCode;
+						return request.getInputStreamJson();
 					}
 				});
 		return httpRequest;
@@ -57,7 +59,7 @@ public class TinySouClient {
 
 	public String execute() throws Exception {
 		HttpHelp request = this.buildRequest();
-		String result;
+		String result = new String();
 		if ("GET".equals(method)) {
 			result = request.get(url);
 		} else if ("POST".equals(method)) {
@@ -67,7 +69,6 @@ public class TinySouClient {
 		} else if ("DELETE".equals(method)) {
 			result = request.delete(url);
 		} else {
-			result = "方法异常";
 		}
 		statusCode = request.getStatusCode();
 		return result;
