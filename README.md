@@ -27,8 +27,8 @@ Download [tinysou-java-v1.00.jar](https://github.com/wangyeming/tinysou-java/tre
 ## Examples
 
 ## Contributing
-Fork it ( https://github.com/tinysou/tinysou-java/fork )
-Create your feature branch (git checkout -b my-new-feature)
-Commit your changes (git commit -am 'Add some feature')
-Push to the branch (git push origin my-new-feature)
-Create a new Pull Request
+1. Fork it ( https://github.com/tinysou/tinysou-java/fork )
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create a new Pull Request
