@@ -27,7 +27,23 @@ public class Search {
 		this.paramsBody = paramsBody.toString();
 	}
 
-	public List<Object> doSearch() throws Exception {
+	public List<Object> doSearchSingleCollection() throws Exception {
+		String token = "token " + authToken;
+		header.put("Authorization", token);
+		header.put("Content-Type", "application/json");
+		String url = "http://api.tinysou.com/v1/engines/" + engineName
+				+ "/collections/" + collectionName + "/search";
+		TinySouClient client = new TinySouClient(url, "POST", header,
+				paramsBody);
+		String response = client.execute();
+		json = new JSONObject(response);
+		int statusCode = client.getStatusCode();
+		result.add(response);
+		result.add(statusCode);
+		return result;
+	}
+	
+	public List<Object> doSearchMultiCollection() throws Exception {
 		String token = "token " + authToken;
 		header.put("Authorization", token);
 		header.put("Content-Type", "application/json");

@@ -133,10 +133,12 @@ public class Demo {
 		Search search = new Search(AUTH_TOKEN, ENGINE_NEME, "page");
 		JSONObject paramsBody = new JSONObject();
 		paramsBody.put("q", "搜索");
-		paramsBody.put("c", "page");
 		search.setParams(paramsBody);
-		result = search.doSearch();
+		result = search.doSearchSingleCollection();
 		System.out.println("response " + result.get(0) + " statusCode "
 				+ result.get(1));
+		result.clear();
+		paramsBody.put("c", "page1,page2");
+		result = search.doSearchMultiCollection();
 	}
 }
