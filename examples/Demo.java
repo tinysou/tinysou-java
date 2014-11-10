@@ -21,8 +21,9 @@ public class Demo {
 	 * @throws Exception
 	 */
 
-	public final static String AUTH_TOKEN = "fc0e0c3eedab24673c4e";
-	public final static String ENGINE_NEME = "wym";
+	public final static String AUTH_TOKEN = "YOUR_AUTH_TOKEN";
+	public final static String ENGINE_NEME = "YOUR_ENGINE_NAME";
+	public final static String COLLECTION_NAME = "YOUR_COLLECTION_NAME";
 	public static List<Object> result = new ArrayList<Object>();
 	protected static JSONObject json = new JSONObject();
 	protected static JSONTokener jsonTokener = new JSONTokener(new String());
@@ -51,14 +52,13 @@ public class Demo {
 		result.clear();
 		// 获取Engine
 		result = engine.get(ENGINE_NEME);
-		System.out.println("response " + result.get(0) + " statusCode "
-				+ result.get(1));
 		result.clear();
 		// 更新Engine
 		result = engine.update(ENGINE_NEME, "panghetun");
 		result.clear();
 		// 删除Engine
 		result = engine.delete(ENGINE_NEME);
+		result.clear();
 	}
 
 	/*
@@ -75,16 +75,17 @@ public class Demo {
 		field_types.put("date", "date");
 		field_types.put("body", "text");
 		// 创建名为"collectionName"的Collection
-		result = collection.create("collectionName", field_types);
+		result = collection.create(COLLECTION_NAME, field_types);
 		result.clear();
 		// 罗列 Collections
 		result = collection.list();
 		result.clear();
 		// 获取名为"collectionName"的Collection
-		result = collection.get("collectionName");
+		result = collection.get(COLLECTION_NAME);
 		result.clear();
 		// 删除名为"collectionName"的Collection
-		result = collection.delete("collectionName");
+		result = collection.delete(COLLECTION_NAME);
+		result.clear();
 	}
 
 	/*
@@ -93,8 +94,8 @@ public class Demo {
 	 */
 	public static void DocumentTest() throws Exception {
 		// 新建Document
-		Document document = new Document(AUTH_TOKEN, "engineName",
-				"collectionName");
+		Document document = new Document(AUTH_TOKEN, ENGINE_NEME,
+				COLLECTION_NAME);
 		Map<String, Object> field_types = new HashMap<String, Object>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(sdf.format(new Date()));
@@ -118,6 +119,7 @@ public class Demo {
 			return;
 		}
 		result.clear();
+		// 罗列Documents
 		result = document.list();
 		result.clear();
 		// 获取Document
@@ -150,6 +152,6 @@ public class Demo {
 		result = autoComplete.doAutoCompleteSingleCollection();
 		result.clear();
 		paramsBody.put("c", "page1,page2");
-		result = autoComplete.doAutoCompleteMultiCollection();
+		// result = autoComplete.doAutoCompleteMultiCollection();
 	}
 }

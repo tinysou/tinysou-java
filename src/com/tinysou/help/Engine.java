@@ -12,7 +12,8 @@ import com.tinysou.help.HttpHelp;
 public class Engine {
 
 	protected String AUTH_TOKEN = new String();
-	protected String url = new String();
+	protected String baseUrl = "http://api.tinysou.com/v1/engines/";
+	protected String url;
 	protected Map<String, String> header = new HashMap<String, String>();
 	protected HttpHelp request = new HttpHelp();
 	protected String method = new String();
@@ -32,16 +33,10 @@ public class Engine {
 
 	// 罗列 Engines
 	public List<Object> list() throws Exception {
-		url = "http://api.tinysou.com/v1/engines";
+		url = baseUrl;
 		method = "GET";
 		statusOk = 200;
-		TinySouClient client = new TinySouClient(url, method, header,
-				paramsBody);
-		response = client.execute();
-		jsonTokener = new JSONTokener(response);
-		int statusCode = client.getStatusCode();
-		result.add(response);
-		result.add(statusCode);
+		getResult(true);
 		return result;
 
 	}
@@ -49,7 +44,7 @@ public class Engine {
 	// 创建一个 Engine
 	public List<Object> create(String engineName, String displayName)
 			throws Exception {
-		url = "http://api.tinysou.com/v1/engines";
+		url = baseUrl;
 		method = "POST";
 		statusOk = 201;
 		// 设置params
@@ -59,63 +54,55 @@ public class Engine {
 			params.accumulate("display_name", displayName);
 		}
 		paramsBody = params.toString();
-		TinySouClient client = new TinySouClient(url, method, header,
-				paramsBody);
-		response = client.execute();
-		json = new JSONObject(response);
-		int statusCode = client.getStatusCode();
-		result.add(response);
-		result.add(statusCode);
+		getResult(false);
 		return result;
 	}
 
 	// 获取一个 Engine
 	public List<Object> get(String engineName) throws Exception {
-		url = "http://api.tinysou.com/v1/engines/" + engineName;
+		url = baseUrl + engineName;
 		method = "GET";
 		statusOk = 200;
-		TinySouClient client = new TinySouClient(url, method, header,
-				paramsBody);
-		response = client.execute();
-		json = new JSONObject(response);
-		int statusCode = client.getStatusCode();
-		result.add(response);
-		result.add(statusCode);
+		getResult(false);
 		return result;
 	}
 
 	// 更新一个 Engine
 	public List<Object> update(String engineName, String displayName)
 			throws Exception {
-		url = "http://api.tinysou.com/v1/engines/" + engineName;
+		url = baseUrl + engineName;
 		method = "PUT";
 		statusOk = 200;
 		// 设置params
 		JSONObject params = new JSONObject();
 		params.accumulate("display_name", displayName);
 		paramsBody = params.toString();
-		TinySouClient client = new TinySouClient(url, method, header,
-				paramsBody);
-		response = client.execute();
-		json = new JSONObject(response);
-		int statusCode = client.getStatusCode();
-		result.add(response);
-		result.add(statusCode);
+		getResult(false);
 		return result;
 	}
 
 	// 删除一个 Engine
 	public List<Object> delete(String engineName) throws Exception {
-		url = "http://api.tinysou.com/v1/engines/" + engineName;
+		url = baseUrl + engineName;
 		method = "DELETE";
 		statusOk = 204;
+		getResult(true);
+		return result;
+	}
+
+	// 建立微搜索请求，获取响应结果
+	public void getResult(boolean isToken) throws Exception {
+		result.clear();
 		TinySouClient client = new TinySouClient(url, method, header,
 				paramsBody);
 		response = client.execute();
-		json = new JSONObject();
+		if (isToken) {
+			jsonTokener = new JSONTokener(response);
+		} else {
+			json = new JSONObject(response);
+		}
 		int statusCode = client.getStatusCode();
 		result.add(response);
 		result.add(statusCode);
-		return result;
 	}
 }
