@@ -8,7 +8,7 @@ import java.util.Map;
 import org.json.JSONObject;
 
 public class AutoComplete {
-	
+
 	protected String authToken = new String();
 	protected String engineName = new String();
 	protected String collectionName = new String();
@@ -17,7 +17,8 @@ public class AutoComplete {
 	protected JSONObject json = new JSONObject();
 	protected List<Object> result = new ArrayList<Object>();
 
-	public AutoComplete(String authToken, String engineName, String collectionName) {
+	public AutoComplete(String authToken, String engineName,
+			String collectionName) {
 		this.authToken = authToken;
 		this.engineName = engineName;
 		this.collectionName = collectionName;
@@ -38,7 +39,7 @@ public class AutoComplete {
 		String response = client.execute();
 		json = new JSONObject(response);
 		int statusCode = client.getStatusCode();
-		result.add(response);
+		result.add(json);
 		result.add(statusCode);
 		return result;
 	}
@@ -47,13 +48,14 @@ public class AutoComplete {
 		String token = "token " + authToken;
 		header.put("Authorization", token);
 		header.put("Content-Type", "application/json");
-		String url = "http://api.tinysou.com/v1/engines/" + engineName + "/autocomplete";
+		String url = "http://api.tinysou.com/v1/engines/" + engineName
+				+ "/autocomplete";
 		TinySouClient client = new TinySouClient(url, "POST", header,
 				paramsBody);
 		String response = client.execute();
 		json = new JSONObject(response);
 		int statusCode = client.getStatusCode();
-		result.add(response);
+		result.add(json);
 		result.add(statusCode);
 		return result;
 	}
